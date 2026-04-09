@@ -1,5 +1,4 @@
-DROP DATABASE Blockbuster;
-CREATE DATABASE BlockBuster;
+CREATE DATABASE Blockbuster;
 USE Blockbuster;
 
 CREATE TABLE Stores
@@ -16,7 +15,7 @@ CREATE TABLE Workers
 	Name varchar(50) Not Null,
 	House_Adress varchar(150),
 	PhoneNo int,
-	Salary int Not Null,
+	Salary DECIMAL Not Null,
 	Start_Date date Not Null,
 	Position varchar(50) Not Null,
 	Date_Of_Birth date,
@@ -31,7 +30,7 @@ CREATE TABLE Dependants
 (
 	Dep_SSN int AUTO_INCREMENT,
 	Name varchar(50) Not Null,
-	Gender char(1), CHECK(Gender IN ('M', 'F')),
+	Gender char(1) CHECK(Gender IN ('M', 'F')),
 	Date_Of_Birth date,
     Work_SSN int,
     PRIMARY KEY (Work_SSN, Dep_SSN),
@@ -44,7 +43,7 @@ CREATE TABLE Customers
 	Name varchar(50),
 	PhoneNo varchar(20) UNIQUE,
 	Email varchar(320) UNIQUE,
-	Fines int Not Null
+	Fines DECIMAL Not Null CHECK (Fines >= 0)
 );
 
 CREATE TABLE Product
@@ -100,12 +99,12 @@ CREATE TABLE Rents -- Many to Many relationship related to Customers and Product
     Product_ID int,
     Return_by_Date date,
     Late_Fees int,
-    PRIMARY KEY(Customer_ID, Product_ID),
+    PRIMARY KEY(Customer_ID, Product_ID, Return_by_Date),
     FOREIGN KEY(Customer_ID) REFERENCES Customers(Customer_ID),
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
 
-CREATE TABLE Rents -- Many to Many relationship related to Stores and Product
+CREATE TABLE Stocks -- Many to Many relationship related to Stores and Product
 (
 	Store_ID int,
     Product_ID int,
@@ -115,7 +114,5 @@ CREATE TABLE Rents -- Many to Many relationship related to Stores and Product
     FOREIGN KEY(Store_ID) REFERENCES Stores(Store_ID),
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
-
-SHOW TABLES; -- Shows all tables in database
 
 
