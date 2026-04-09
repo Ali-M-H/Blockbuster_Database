@@ -10,18 +10,9 @@ CREATE TABLE Stores
 	open_Date date Not Null
 );
 
-CREATE TABLE Revenue -- Multivalued attribute related to Stores
-(
-	Store_ID int,
-    Year int,
-    Store_Revenue DECIMAL(25,5) CHECK( Store_revenue >= 0 ),
-    PRIMARY KEY(Store_ID, Year), -- Composite primary key
-    FOREIGN KEY (Store_ID) REFERENCES Stores(Store_ID) ON UPDATE CASCADE ON DELETE CASCADE  -- How to write a foreign key
-);
-
 CREATE TABLE Workers
 (
-	SSN int AUTO_INCREMENT PRIMARY KEY,
+	Work_SSN int AUTO_INCREMENT PRIMARY KEY,
 	Name varchar(50) Not Null,
 	House_Adress varchar(150),
 	PhoneNo int,
@@ -29,15 +20,22 @@ CREATE TABLE Workers
 	Start_Date date Not Null,
 	Position varchar(50) Not Null,
 	Date_Of_Birth date,
-	Gender char(1) CHECK(Gender IN ('M', 'F'))
+	Gender char(1) CHECK(Gender IN ('M', 'F')),
+    Store_ID int,
+    FOREIGN KEY (Store_ID) REFERENCES stores(Store_ID)
     );	
+    
+    
     
 CREATE TABLE Dependants
 (
-	SSN int AUTO_INCREMENT PRIMARY KEY,
+	Dep_SSN int AUTO_INCREMENT,
 	Name varchar(50) Not Null,
 	Gender char(1), CHECK(Gender IN ('M', 'F')),
-	Date_Of_Birth date
+	Date_Of_Birth date,
+    Work_SSN int,
+    PRIMARY KEY (Work_SSN, Dep_SSN),
+    FOREIGN KEY (Work_SSN) REFERENCES Workers(Work_SSN)
 	);
 
 CREATE TABLE Customers
@@ -46,33 +44,19 @@ CREATE TABLE Customers
 	Name varchar(50),
 	PhoneNo varchar(20) UNIQUE,
 	Email varchar(320) UNIQUE,
-	Borrowing_Status varchar(10) Not Null, -- Recheck this later
 	Fines int Not Null
 );
-
-
 
 CREATE TABLE Product
 (
 	Product_ID int AUTO_INCREMENT PRIMARY KEY,
 	Title varchar(255) NOT NULL,
-	InStock tinyint Not Null, -- Number of copies currently in stock
-	Copies_Borrowed tinyint DEFAULT 0 Not Null, -- Number of copies currently borrowed out
 	Age_Rating	varchar(10),
 	Release_Date date, 
 	Director varchar(50),
 	Price decimal(5, 2) Not Null CHECK(Price >= 20)
 
 );
-
-
-CREATE TABLE Genre -- Multivalued attribute related to Product
-(
-	Product_ID int,
-    Genre varchar(20),
-    PRIMARY KEY (Product_ID, Genre),
-	FOREIGN KEY (Product_ID) REFERENCES Product(Product_ID) ON UPDATE CASCADE ON DELETE CASCADE
-    ); 
 
 
 CREATE TABLE StoreCards
@@ -82,9 +66,55 @@ CREATE TABLE StoreCards
 	Expiration_Date date Not Null,
     Customer_ID int,
     PRIMARY KEY( Customer_ID, Expiration_date ),
-    FOREIGN KEY( Customer_ID ) REFERENCES Customers( Customer_ID ) ON UPDATE CASCADE
+    FOREIGN KEY( Customer_ID ) REFERENCES Customers( Customer_ID ) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- -- -- -- -- -- -- -- -- --
+-- MULTIVALUED ATTRIBUTES
+-- -- -- -- -- -- -- -- -- --
+
+CREATE TABLE Genre -- Multivalued attribute related to Product
+(
+	Product_ID int,
+    Genre varchar(20),
+    PRIMARY KEY (Product_ID, Genre),
+	FOREIGN KEY (Product_ID) REFERENCES Product(Product_ID) ON UPDATE CASCADE ON DELETE CASCADE
+    ); 
+
+CREATE TABLE Revenue -- Multivalued attribute related to Stores
+(
+	Store_ID int,
+    Year int,
+    Store_Revenue DECIMAL(25,5) CHECK( Store_revenue >= 0 ),
+    PRIMARY KEY(Store_ID, Year), -- Composite primary key
+    FOREIGN KEY (Store_ID) REFERENCES Stores(Store_ID) ON UPDATE CASCADE ON DELETE CASCADE  -- How to write a foreign key
+);
+
+-- -- -- -- -- -- -- -- -- --
+-- Relationships
+-- -- -- -- -- -- -- -- -- --
+
+CREATE TABLE Rents -- Many to Many relationship related to Customers and Product
+(
+	Customer_ID int,
+    Product_ID int,
+    Return_by_Date date,
+    Late_Fees int,
+    PRIMARY KEY(Customer_ID, Product_ID),
+    FOREIGN KEY(Customer_ID) REFERENCES Customers(Customer_ID),
+	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
+);
+
+CREATE TABLE Rents -- Many to Many relationship related to Stores and Product
+(
+	Store_ID int,
+    Product_ID int,
+	InStock tinyint Not Null, -- Number of copies currently in stock
+	Copies_Borrowed tinyint DEFAULT 0 Not Null, -- Number of copies currently borrowed out
+    PRIMARY KEY(Store_ID, Product_ID),
+    FOREIGN KEY(Store_ID) REFERENCES Stores(Store_ID),
+	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
+);
 
 SHOW TABLES; -- Shows all tables in database
 
