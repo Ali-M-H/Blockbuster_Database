@@ -1,4 +1,3 @@
-DROP DATABASE Blockbuster;
 CREATE DATABASE Blockbuster;
 USE Blockbuster;
 
@@ -114,7 +113,5 @@ CREATE TABLE Stocks -- Many to Many relationship related to Stores and Product
     FOREIGN KEY(Store_ID) REFERENCES Stores(Store_ID),
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
-
-SHOW TABLES; -- Shows all tables in database
 
 
