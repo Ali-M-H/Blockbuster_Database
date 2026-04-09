@@ -1,3 +1,4 @@
+DROP DATABASE Blockbuster;
 CREATE DATABASE Blockbuster;
 USE Blockbuster;
 
@@ -28,12 +29,11 @@ CREATE TABLE Workers
     
 CREATE TABLE Dependants
 (
-	Dep_SSN int AUTO_INCREMENT,
 	Name varchar(50) Not Null,
 	Gender char(1) CHECK(Gender IN ('M', 'F')),
 	Date_Of_Birth date,
     Work_SSN int,
-    PRIMARY KEY (Work_SSN, Dep_SSN),
+    PRIMARY KEY (Work_SSN, Name, Date_Of_Birth),
     FOREIGN KEY (Work_SSN) REFERENCES Workers(Work_SSN)
 	);
 
@@ -114,5 +114,7 @@ CREATE TABLE Stocks -- Many to Many relationship related to Stores and Product
     FOREIGN KEY(Store_ID) REFERENCES Stores(Store_ID),
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
+
+SHOW TABLES; -- Shows all tables in database
 
 
