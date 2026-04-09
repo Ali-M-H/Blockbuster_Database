@@ -1,0 +1,91 @@
+DROP DATABASE Blockbuster;
+CREATE DATABASE BlockBuster;
+USE Blockbuster;
+
+CREATE TABLE Stores
+(
+	Store_ID int AUTO_INCREMENT PRIMARY KEY,
+	Location varchar(150) Not Null,
+	No_of_workers tinyint,
+	open_Date date Not Null
+);
+
+CREATE TABLE Revenue -- Multivalued attribute related to Stores
+(
+	Store_ID int,
+    Year int,
+    Store_Revenue DECIMAL(25,5) CHECK( Store_revenue >= 0 ),
+    PRIMARY KEY(Store_ID, Year), -- Composite primary key
+    FOREIGN KEY (Store_ID) REFERENCES Stores(Store_ID) ON UPDATE CASCADE ON DELETE CASCADE  -- How to write a foreign key
+);
+
+CREATE TABLE Workers
+(
+	SSN int AUTO_INCREMENT PRIMARY KEY,
+	Name varchar(50) Not Null,
+	House_Adress varchar(150),
+	PhoneNo int,
+	Salary int Not Null,
+	Start_Date date Not Null,
+	Position varchar(50) Not Null,
+	Date_Of_Birth date,
+	Gender char(1) CHECK(Gender IN ('M', 'F'))
+    );	
+    
+CREATE TABLE Dependants
+(
+	SSN int AUTO_INCREMENT PRIMARY KEY,
+	Name varchar(50) Not Null,
+	Gender char(1), CHECK(Gender IN ('M', 'F')),
+	Date_Of_Birth date
+	);
+
+CREATE TABLE Customers
+(
+	Customer_ID int AUTO_INCREMENT PRIMARY KEY,
+	Name varchar(50),
+	PhoneNo varchar(20) UNIQUE,
+	Email varchar(320) UNIQUE,
+	Borrowing_Status varchar(10) Not Null, -- Recheck this later
+	Fines int Not Null
+);
+
+
+
+CREATE TABLE Product
+(
+	Product_ID int AUTO_INCREMENT PRIMARY KEY,
+	Title varchar(255) NOT NULL,
+	InStock tinyint Not Null, -- Number of copies currently in stock
+	Copies_Borrowed tinyint DEFAULT 0 Not Null, -- Number of copies currently borrowed out
+	Age_Rating	varchar(10),
+	Release_Date date, 
+	Director varchar(50),
+	Price decimal(5, 2) Not Null CHECK(Price >= 20)
+
+);
+
+
+CREATE TABLE Genre -- Multivalued attribute related to Product
+(
+	Product_ID int,
+    Genre varchar(20),
+    PRIMARY KEY (Product_ID, Genre),
+	FOREIGN KEY (Product_ID) REFERENCES Product(Product_ID) ON UPDATE CASCADE ON DELETE CASCADE
+    ); 
+
+
+CREATE TABLE StoreCards
+(
+	Card_Level tinyint(1) Not Null CHECK(Card_level > 0 and Card_level <= 5),
+	Card_Status bool Not Null,
+	Expiration_Date date Not Null,
+    Customer_ID int,
+    PRIMARY KEY( Customer_ID, Expiration_date ),
+    FOREIGN KEY( Customer_ID ) REFERENCES Customers( Customer_ID ) ON UPDATE CASCADE
+);
+
+
+SHOW TABLES; -- Shows all tables in database
+
+
