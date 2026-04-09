@@ -13,7 +13,7 @@ CREATE TABLE Workers
 (
 	Work_SSN int AUTO_INCREMENT PRIMARY KEY,
 	Name varchar(50) Not Null,
-	House_Adress varchar(150),
+	House_Address varchar(150),
 	PhoneNo int,
 	Salary DECIMAL Not Null,
 	Start_Date date Not Null,
