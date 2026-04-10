@@ -117,4 +117,3 @@ CREATE TABLE Stocks -- Many to Many relationship related to Stores and Product
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
 
-
