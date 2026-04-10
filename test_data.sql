@@ -1,4 +1,3 @@
-USE blockbuster;
 INSERT INTO Stores (Address, No_of_workers, open_Date) VALUES
 ('123 Main St, Cairo', 12, '2015-06-01'),
 ('45 Nile Ave, Giza', 9, '2017-08-15'),
@@ -29,26 +28,36 @@ INSERT INTO Customers (First_Name, last_Name, PhoneNo, Email, Fines) VALUES
 ('Omar', 'Nabil', '01044444444', 'omar@email.com', 0),
 ('Nada', 'Tarek', '01055555555', 'nada@email.com', 2);
 
-INSERT INTO StoreCards (Card_Level, Card_Status, Expiration_Date, Customer_ID) VALUES
+INSERT INTO StoreCards (Benefits_Level, Status, Expiration_Date, Customer_ID) VALUES
 (3, TRUE, '2026-12-31', 1),
 (2, TRUE, '2025-10-10', 2),
 (5, TRUE, '2027-01-01', 3),
 (1, FALSE, '2024-05-05', 4),
 (4, TRUE, '2026-06-06', 5);
 
-INSERT INTO Product (Title, Age_Rating, Release_Date, Director, Price) VALUES
-('Inception', 'PG-13', '2010-07-16', 'Christopher Nolan', 50.00),
-('The Matrix', 'R', '1999-03-31', 'Wachowski', 45.00),
-('Frozen', 'G', '2013-11-27', 'Disney', 30.00),
-('Avengers', 'PG-13', '2012-05-04', 'Joss Whedon', 55.00),
-('Titanic', 'PG-13', '1997-12-19', 'James Cameron', 40.00);
+INSERT INTO Product (Title, Age_Rating, Release_Date, Director, Price, Type) VALUES
+-- Movies
+('Inception', 'PG-13', '2010-07-16', 'Christopher Nolan', 50.00, 'Movie'),
+('The Matrix', 'R', '1999-03-31', 'Wachowski', 45.00, 'Movie'),
+('Titanic', 'PG-13', '1997-12-19', 'James Cameron', 40.00, 'Movie'),
+('Avengers: Endgame', 'PG-13', '2019-04-26', 'Russo Brothers', 60.00, 'Movie'),
+-- Video Games
+('The Last of Us', '18+', '2013-06-14', 'Naughty Dog', 70.00, 'Video Game'),
+('FIFA 23', 'E', '2022-09-30', 'EA Sports', 65.00, 'Video Game'),
+('Call of Duty: Modern Warfare', '18+', '2019-10-25', 'Infinity Ward', 75.00, 'Video Game'),
+('Minecraft', 'E', '2011-11-18', 'Mojang', 55.00, 'Video Game');
 
 INSERT INTO Genre (Product_ID, Genre) VALUES
+-- Movies
 (1, 'Sci-Fi'), (1, 'Action'),
 (2, 'Sci-Fi'), (2, 'Action'),
-(3, 'Animation'),
+(3, 'Romance'), (3, 'Drama'),
 (4, 'Action'),
-(5, 'Romance'), (5, 'Drama');
+-- Video Games
+(5, 'Adventure'), (5, 'Survival'),
+(6, 'Sports'),
+(7, 'Shooter'),
+(8, 'Sandbox');
 
 INSERT INTO Revenue (Store_ID, Year, Store_Revenue) VALUES
 (1, 2023, 150000),
