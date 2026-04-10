@@ -34,7 +34,7 @@ CREATE TABLE Dependants
 	Gender char(1) CHECK(Gender IN ('M', 'F')),
 	Date_Of_Birth date,
     Work_SSN int,
-    PRIMARY KEY (Work_SSN, First_Name, Date_Of_Birth),
+    PRIMARY KEY (Work_SSN, First_Name, last_Name),
     FOREIGN KEY (Work_SSN) REFERENCES Workers(Work_SSN)
 	);
 
@@ -117,3 +117,5 @@ CREATE TABLE Stocks -- Many to Many relationship related to Stores and Product
     FOREIGN KEY(Store_ID) REFERENCES Stores(Store_ID),
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
+
+
