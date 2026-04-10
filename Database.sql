@@ -53,6 +53,7 @@ CREATE TABLE Product
 	Product_ID int AUTO_INCREMENT PRIMARY KEY,
 	Title varchar(255) NOT NULL,
 	Age_Rating	varchar(10),
+	type varchar(15),
 	Release_Date date, 
 	Director varchar(50),
 	Price decimal(5, 2) Not Null CHECK(Price >= 20)
