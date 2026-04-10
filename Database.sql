@@ -53,7 +53,7 @@ CREATE TABLE Product
 	Product_ID int AUTO_INCREMENT PRIMARY KEY,
 	Title varchar(255) NOT NULL,
 	Age_Rating	varchar(10),
-	type varchar(15),
+    type varchar(15),
 	Release_Date date, 
 	Director varchar(50),
 	Price decimal(5, 2) Not Null CHECK(Price >= 20)
@@ -63,8 +63,8 @@ CREATE TABLE Product
 
 CREATE TABLE StoreCards
 (
-	Card_Level tinyint(1) Not Null CHECK(Card_level > 0 and Card_level <= 5),
-	Card_Status bool Not Null,
+	Benefits_Level tinyint(1) Not Null CHECK(Benefits_Level > 0 and Benefits_Level <= 5),
+	Status bool Not Null,
 	Expiration_Date date Not Null,
     Customer_ID int,
     PRIMARY KEY( Customer_ID, Expiration_date ),
@@ -117,4 +117,3 @@ CREATE TABLE Stocks -- Many to Many relationship related to Stores and Product
     FOREIGN KEY(Store_ID) REFERENCES Stores(Store_ID),
 	FOREIGN KEY(Product_ID) REFERENCES Product(Product_ID)
 );
-
