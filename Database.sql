@@ -4,7 +4,7 @@ USE Blockbuster;
 CREATE TABLE Stores
 (
 	Store_ID int AUTO_INCREMENT PRIMARY KEY,
-	Location varchar(150) Not Null,
+	Address varchar(150) Not Null,
 	No_of_workers tinyint,
 	open_Date date Not Null
 );
@@ -12,7 +12,8 @@ CREATE TABLE Stores
 CREATE TABLE Workers
 (
 	Work_SSN int AUTO_INCREMENT PRIMARY KEY,
-	Name varchar(50) Not Null,
+	First_Name varchar(50) Not Null,
+    last_Name varchar(50) Not Null,
 	House_Address varchar(150),
 	PhoneNo int,
 	Salary DECIMAL Not Null,
@@ -28,18 +29,20 @@ CREATE TABLE Workers
     
 CREATE TABLE Dependants
 (
-	Name varchar(50) Not Null,
+	First_Name varchar(50) Not Null,
+    last_Name varchar(50) Not Null,
 	Gender char(1) CHECK(Gender IN ('M', 'F')),
 	Date_Of_Birth date,
     Work_SSN int,
-    PRIMARY KEY (Work_SSN, Name, Date_Of_Birth),
+    PRIMARY KEY (Work_SSN, First_Name, Date_Of_Birth),
     FOREIGN KEY (Work_SSN) REFERENCES Workers(Work_SSN)
 	);
 
 CREATE TABLE Customers
 (
 	Customer_ID int AUTO_INCREMENT PRIMARY KEY,
-	Name varchar(50),
+	First_Name varchar(50) Not Null,
+    last_Name varchar(50) Not Null,
 	PhoneNo varchar(20) UNIQUE,
 	Email varchar(320) UNIQUE,
 	Fines DECIMAL Not Null CHECK (Fines >= 0)
