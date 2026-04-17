@@ -1,0 +1,11 @@
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.csproj.AssemblyReference.cache
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterApp.Form1.resources
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.Properties.Resources.resources
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.csproj.GenerateResource.cache
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.csproj.CoreCompileInputs.cache
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\bin\Debug\BlockbusterAPP.exe.config
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\bin\Debug\BlockbusterAPP.exe
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\bin\Debug\BlockbusterAPP.pdb
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.exe
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.pdb
+C:\Users\wolfb\source\repos\BlockbusterAPP\BlockbusterAPP\obj\Debug\BlockbusterAPP.exe.config
